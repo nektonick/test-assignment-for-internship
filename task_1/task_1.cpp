@@ -7,16 +7,17 @@
 #include <vector>
 #include <string> 
 
-#define READERS_COUNT 5
-#define WRITERS_COUNT 3
-#define REPEATS_COUNT 2
+#define READERS_COUNT 25
+#define WRITERS_COUNT 13
+#define REPEATS_COUNT 3
 
 // Время в милисекундах
-#define READER_TIME 230
-#define WRITER_TIME 450
+#define READER_TIME 636
+#define WRITER_TIME 954
 
 std::shared_mutex mutex_;
 
+// вывод текущего системного времени с точностью до милисекунд
 void printTimeStamp() {
     SYSTEMTIME timeStamp;
     GetLocalTime(&timeStamp);
@@ -25,6 +26,7 @@ void printTimeStamp() {
         timeStamp.wSecond, timeStamp.wMilliseconds);
 }
 
+// синхронищированный вывод информации
 std::mutex cout_mutex;
 void log(const std::string& msg) {
     std::lock_guard<std::mutex> guard(cout_mutex);
@@ -50,25 +52,34 @@ void read(int readers_num) {
 
 int main() {
     setlocale(LC_ALL, "Russian");
-    
+    srand(1);
     for (size_t i = 0; i < REPEATS_COUNT; ++i) {
-        srand(i);
+        
         log(std::string(" ") + std::to_string(i) + std::string(" повтор программы\n\n"));
+        
         std::vector<std::thread> threads;
-
         size_t total_writers = 0, total_readers = 0;
-        while (total_readers < READERS_COUNT || total_writers < WRITERS_COUNT) {
-            if (rand() % 2 == 0 && total_writers < WRITERS_COUNT) {
-                threads.emplace_back(write, total_writers);
-                ++total_writers;
+
+        try {
+            //Добавляем в очередь писателей и читателей в случайном порядке
+            while (total_readers < READERS_COUNT || total_writers < WRITERS_COUNT) {
+                if (rand() % 2 == 0 && total_writers < WRITERS_COUNT) {
+                    threads.emplace_back(write, total_writers);
+                    ++total_writers;
+                }
+                else if (total_readers < READERS_COUNT) {
+                    threads.emplace_back(read, total_readers);
+                    ++total_readers;
+                }
             }
-            else if (total_readers < READERS_COUNT){
-                threads.emplace_back(read, total_readers);
-                ++total_readers;
+            for (size_t n = 0; n < threads.size(); ++n) {
+                threads[n].join();
             }
+
+            threads.clear();
         }
-        for (size_t n = 0; n < threads.size(); ++n) {
-            threads[n].join();
+        catch(std::exception e) {
+            std::cout << "\nError: " << e.what() << std::endl;
         }
     }
 }
