@@ -7,11 +7,11 @@
 class Department {
 protected:
 	std::string name;
-	uint64_t number_of_employees; // Количество работников отрицательным быть не может
+	uint64_t number_of_employees; // РљРѕР»РёС‡РµСЃС‚РІРѕ СЂР°Р±РѕС‚РЅРёРєРѕРІ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј Р±С‹С‚СЊ РЅРµ РјРѕР¶РµС‚
 	long double average_salary;
 	std::vector<Employment> employments;
 
-	long double total_salary; // Для расчёта средней зарплаты
+	long double total_salary; // Р”Р»СЏ СЂР°СЃС‡С‘С‚Р° СЃСЂРµРґРЅРµР№ Р·Р°СЂРїР»Р°С‚С‹
 
 	void recalculate_average_salary() {
 		this->average_salary = this->total_salary / this->number_of_employees;
@@ -30,21 +30,21 @@ public:
 
 	void swap(Department& dep1, Department& dep2) noexcept;
 
-	// Добавляет работника в конец списка сотрудников
+	// Р”РѕР±Р°РІР»СЏРµС‚ СЂР°Р±РѕС‚РЅРёРєР° РІ РєРѕРЅРµС† СЃРїРёСЃРєР° СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ
 	void add_employment(Employment& emp);
 	void add_employment(std::string& surname, std::string& name, std::string& middleName, std::string& function, long double& salary);
 
-	// Удаляет i-того сотрудника в списке, считая с нуля
+	// РЈРґР°Р»СЏРµС‚ i-С‚РѕРіРѕ СЃРѕС‚СЂСѓРґРЅРёРєР° РІ СЃРїРёСЃРєРµ, СЃС‡РёС‚Р°СЏ СЃ РЅСѓР»СЏ
 	void remove_employment(size_t index);
 
-	// Удаляет работника с заданными ФИО, если такой есть. Если работников несколько, удаляет только первого (с меньшим индексом)
+	// РЈРґР°Р»СЏРµС‚ СЂР°Р±РѕС‚РЅРёРєР° СЃ Р·Р°РґР°РЅРЅС‹РјРё Р¤РРћ, РµСЃР»Рё С‚Р°РєРѕР№ РµСЃС‚СЊ. Р•СЃР»Рё СЂР°Р±РѕС‚РЅРёРєРѕРІ РЅРµСЃРєРѕР»СЊРєРѕ, СѓРґР°Р»СЏРµС‚ С‚РѕР»СЊРєРѕ РїРµСЂРІРѕРіРѕ (СЃ РјРµРЅСЊС€РёРј РёРЅРґРµРєСЃРѕРј)
 	void remove_employment(std::string& surname, std::string& name, std::string& middleName);
 
-	// Функция замены. Вставляет нового работника на место старого
+	// Р¤СѓРЅРєС†РёСЏ Р·Р°РјРµРЅС‹. Р’СЃС‚Р°РІР»СЏРµС‚ РЅРѕРІРѕРіРѕ СЂР°Р±РѕС‚РЅРёРєР° РЅР° РјРµСЃС‚Рѕ СЃС‚Р°СЂРѕРіРѕ
 	void remplace_employment(size_t index, Employment& new_emp);
 
 
-	/* Разнообразные геттеры:: */
+	/* Р Р°Р·РЅРѕРѕР±СЂР°Р·РЅС‹Рµ РіРµС‚С‚РµСЂС‹:: */
 
 	std::string get_name() {
 		return this->name;

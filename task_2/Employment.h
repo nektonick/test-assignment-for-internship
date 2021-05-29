@@ -7,7 +7,7 @@ protected:
 	std::string name;
 	std::string middleName;
 	std::string function;
-	long double salary; // Предполагаю, что зарплата может быть и отрицательной, например, из-за штрафов
+	long double salary; // РџСЂРµРґРїРѕР»Р°РіР°СЋ, С‡С‚Рѕ Р·Р°СЂРїР»Р°С‚Р° РјРѕР¶РµС‚ Р±С‹С‚СЊ Рё РѕС‚СЂРёС†Р°С‚РµР»СЊРЅРѕР№, РЅР°РїСЂРёРјРµСЂ, РёР·-Р·Р° С€С‚СЂР°С„РѕРІ
 
 public:
 	Employment();
@@ -20,7 +20,7 @@ public:
 
 	void swap(Employment& emp1, Employment& emp2) noexcept;
 	
-	/* Разнообразные геттеры: */
+	/* Р Р°Р·РЅРѕРѕР±СЂР°Р·РЅС‹Рµ РіРµС‚С‚РµСЂС‹: */
 
 	std::string get_surname();
 	std::string get_name();
