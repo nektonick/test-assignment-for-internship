@@ -13,9 +13,7 @@ protected:
 
 	long double total_salary; // Для расчёта средней зарплаты
 
-	void recalculate_average_salary() {
-		this->average_salary = this->total_salary / this->number_of_employees;
-	}
+	void recalculate_average_salary();
 
 public:
 	Department();
@@ -46,17 +44,8 @@ public:
 
 	/* Разнообразные геттеры:: */
 
-	std::string get_name() {
-		return this->name;
-	}
-	uint64_t get_number_of_employees() {
-		return this->number_of_employees;
-	}
-	long double get_average_salary() {
-		return this->average_salary;
-	}
-
-
-
+	std::string get_name();
+	uint64_t get_number_of_employees();
+	long double get_average_salary();
 };
 

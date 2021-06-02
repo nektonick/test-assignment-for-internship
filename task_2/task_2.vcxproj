@@ -116,6 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,14 +140,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Commands.cpp" />
+    <ClCompile Include="CommandHistory.cpp" />
+    <ClCompile Include="Database.cpp" />
     <ClCompile Include="Department.cpp" />
     <ClCompile Include="Employment.cpp" />
+    <ClCompile Include="Input_output.cpp" />
     <ClCompile Include="task_2.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Commands.h" />
+    <ClInclude Include="CommandHistory.h" />
+    <ClInclude Include="Database.h" />
     <ClInclude Include="Department.h" />
     <ClInclude Include="Employment.h" />
+    <ClInclude Include="Input_output.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
