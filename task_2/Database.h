@@ -25,8 +25,45 @@ public:
 	Database();
 
 	Database(const Database& db);
-	
+
+	Database& operator=(const Database& db);
+
 	~Database();
+
+	void add_dep(Department& dep) {
+
+	}
+
+	void add_emp(Employment& emp) {
+
+	}
+
+	void select_dep(size_t id) {
+
+	}
+
+	void select_emp(size_t id) {
+
+	}
+
+	void remove_cur_dep() {
+
+	}
+
+	void remove_cur_emp() {
+
+	}
+
+	void edit_cur_dep(Department& dep) {
+
+	}
+
+	void edit_cur_emp(Employment& emp) {
+
+	}
+
+	// Возвращает строку с информацией о сотрудниках и подразделениях
+	std::string get_formated_data();
 
 	Error_type load_data(std::string input_file_name);
 

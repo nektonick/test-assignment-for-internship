@@ -47,5 +47,6 @@ public:
 	std::string get_name();
 	uint64_t get_number_of_employees();
 	long double get_average_salary();
+	std::vector<Employment> get_employments();
 };
 

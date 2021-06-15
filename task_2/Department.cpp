@@ -101,3 +101,7 @@ uint64_t Department::get_number_of_employees() {
 long double Department::get_average_salary() {
 	return this->average_salary;
 }
+
+std::vector<Employment> Department::get_employments() {
+	return this->employments;
+}

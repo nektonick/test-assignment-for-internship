@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include <iostream>
+#include <sstream>
 
 
 class Input_output

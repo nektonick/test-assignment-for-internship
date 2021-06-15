@@ -14,8 +14,33 @@ Database::Database(const Database& db) {
 	this->departments = db.departments;
 }
 
+Database& Database::operator=(const Database& db) {
+	this->file_name = db.file_name;
+	this->doc = db.doc; // копируется именно указатель, а не значение, т.к. нет конструктора копий для значения
+	this->cur_dep = db.cur_dep;
+	this->cur_emp = db.cur_emp;
+	this->departments = db.departments;
+	return *this;
+}
+
+
 Database::~Database() {
 	delete this->doc;
+}
+
+std::string Database::get_formated_data() {
+	const std::string TAB = u8"	";
+	std::string ans = (this->departments.empty()) ? u8"Нет подразделений\n" : u8"" ;
+	for (auto i : this->departments) {
+		ans += u8"- " + i.get_name() + u8": количество сотрудников - " + std::to_string(i.get_number_of_employees())
+			+ u8", средняя зарплата - " + std::to_string(i.get_average_salary()) + u8".\n Сотрудники: \n";
+		for (auto j : i.get_employments()) {
+			ans += TAB + u8"- " + j.get_full_name() + ": " + j.get_function() + u8" с зарплатой " + std::to_string(j.get_salary()) + u8"\n";
+		}
+		ans += u8"\n";
+	}
+
+	return ans;
 }
 
 Error_type Database::load_data(std::string input_file_name) {
