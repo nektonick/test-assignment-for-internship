@@ -8,7 +8,7 @@ Database::Database() {
 
 Database::Database(const Database& db) {
 	this->file_name = db.file_name;
-	//this->doc = db.doc; // копируется именно указатель, а не значение, т.к. нет конструктора копий для значения
+	//this->doc = db.doc; // РєРѕРїРёСЂСѓРµС‚СЃСЏ РёРјРµРЅРЅРѕ СѓРєР°Р·Р°С‚РµР»СЊ, Р° РЅРµ Р·РЅР°С‡РµРЅРёРµ, С‚.Рє. РЅРµС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° РєРѕРїРёР№ РґР»СЏ Р·РЅР°С‡РµРЅРёСЏ
 	this->doc = nullptr;
 	this->cur_dep_index = db.cur_dep_index;
 	this->cur_emp_index = db.cur_emp_index;
@@ -18,7 +18,7 @@ Database::Database(const Database& db) {
 Database& Database::operator=(const Database& db) {
 	this->file_name = db.file_name;
 	this->doc = nullptr;
-	//this->doc = db.doc; // копируется именно указатель, а не значение, т.к. нет конструктора копий для значения
+	//this->doc = db.doc; // РєРѕРїРёСЂСѓРµС‚СЃСЏ РёРјРµРЅРЅРѕ СѓРєР°Р·Р°С‚РµР»СЊ, Р° РЅРµ Р·РЅР°С‡РµРЅРёРµ, С‚.Рє. РЅРµС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° РєРѕРїРёР№ РґР»СЏ Р·РЅР°С‡РµРЅРёСЏ
 	this->cur_dep_index = db.cur_dep_index;
 	this->cur_emp_index = db.cur_emp_index;
 	this->departments = db.departments;
@@ -41,17 +41,17 @@ void Database::add_emp(Employment& emp) {
 
 void Database::select_dep(int id) {
 	if (id > (int)(this->departments.size() - 1) || id < 0) {
-		throw std::exception(u8"Нет подразделения с таким индексом\n");
+		throw std::exception(u8"РќРµС‚ РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏ СЃ С‚Р°РєРёРј РёРЅРґРµРєСЃРѕРј\n");
 	}
 	this->cur_dep_index = id;
 }
 
 void Database::select_emp(int id) {
 	if (this->departments.size() < 1) {
-		throw std::exception(u8"Нет подразделений, в которых можно было бы выбрать работника\n");
+		throw std::exception(u8"РќРµС‚ РїРѕРґСЂР°Р·РґРµР»РµРЅРёР№, РІ РєРѕС‚РѕСЂС‹С… РјРѕР¶РЅРѕ Р±С‹Р»Рѕ Р±С‹ РІС‹Р±СЂР°С‚СЊ СЂР°Р±РѕС‚РЅРёРєР°\n");
 	}
 	if (id > (int)(this->departments[this->cur_dep_index].get_employments().size() - 1) || id < 0) {
-		throw std::exception(u8"В текущем подразделении нет рабочего с таким индексом\n");
+		throw std::exception(u8"Р’ С‚РµРєСѓС‰РµРј РїРѕРґСЂР°Р·РґРµР»РµРЅРёРё РЅРµС‚ СЂР°Р±РѕС‡РµРіРѕ СЃ С‚Р°РєРёРј РёРЅРґРµРєСЃРѕРј\n");
 	}
 	this->cur_emp_index = id;
 }
@@ -81,18 +81,18 @@ void Database::edit_cur_emp(Employment& emp) {
 
 std::string Database::get_formated_data() {
 	const std::string TAB = u8"	";
-	std::string ans = (this->departments.empty()) ? u8"Нет подразделений\n" : u8"" ;
+	std::string ans = (this->departments.empty()) ? u8"РќРµС‚ РїРѕРґСЂР°Р·РґРµР»РµРЅРёР№\n" : u8"" ;
 	int index = 0;
 	for (auto i : this->departments) {
 		ans += u8"- ";
 		if (index == this->cur_dep_index) {
 			ans += u8"(*) ";
 		}
-		ans += std::to_string(index) + u8") " + i.get_name() + u8": количество сотрудников - " + std::to_string(i.get_number_of_employees())
-			+ u8", средняя зарплата - " + std::to_string(int(i.get_average_salary())) + u8".\n Сотрудники: \n";
+		ans += std::to_string(index) + u8") " + i.get_name() + u8": РєРѕР»РёС‡РµСЃС‚РІРѕ СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ - " + std::to_string(i.get_number_of_employees())
+			+ u8", СЃСЂРµРґРЅСЏСЏ Р·Р°СЂРїР»Р°С‚Р° - " + std::to_string(int(i.get_average_salary())) + u8".\n РЎРѕС‚СЂСѓРґРЅРёРєРё: \n";
 		
 		if (i.get_employments().size() <= 0) {
-			ans += TAB + u8"- Нет сотрудников\n";
+			ans += TAB + u8"- РќРµС‚ СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ\n";
 		}
 		else {
 			int index2 = 0;
@@ -101,7 +101,7 @@ std::string Database::get_formated_data() {
 				if (index == this->cur_dep_index && index2 == this->cur_emp_index) {
 					ans += u8"(*) ";
 				}
-				ans += std::to_string(index2) + u8") "+ j.get_full_name() + ": " + j.get_function() + u8" с зарплатой " + std::to_string(int(j.get_salary())) + u8"\n";
+				ans += std::to_string(index2) + u8") "+ j.get_full_name() + ": " + j.get_function() + u8" СЃ Р·Р°СЂРїР»Р°С‚РѕР№ " + std::to_string(int(j.get_salary())) + u8"\n";
 
 				++index2;
 			}
@@ -130,7 +130,7 @@ Error_type Database::load_data(std::string input_file_name) {
 		while (dep_xml != nullptr) {
 			Department dep(dep_xml->Attribute("name"));
 
-			// считывание сотрудников
+			// СЃС‡РёС‚С‹РІР°РЅРёРµ СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ
 			tinyxml2::XMLElement* employments_xml = dep_xml->FirstChildElement();
 
 			tinyxml2::XMLElement* employment_xml = employments_xml->FirstChildElement();

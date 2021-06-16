@@ -8,16 +8,16 @@ void Application::clear_all_commands() {
 }
 
 Application::Application() {
-	// Создаём список всех комманд, которые приложение будет выполнять
+	// РЎРѕР·РґР°С‘Рј СЃРїРёСЃРѕРє РІСЃРµС… РєРѕРјРјР°РЅРґ, РєРѕС‚РѕСЂС‹Рµ РїСЂРёР»РѕР¶РµРЅРёРµ Р±СѓРґРµС‚ РІС‹РїРѕР»РЅСЏС‚СЊ
 	this->all_commands = this->generate_available_commands_list();
 
-	// Передаём в HelpCommand это список, чтобы можно было вывести справку по каждой команде (костыль)
+	// РџРµСЂРµРґР°С‘Рј РІ HelpCommand СЌС‚Рѕ СЃРїРёСЃРѕРє, С‡С‚РѕР±С‹ РјРѕР¶РЅРѕ Р±С‹Р»Рѕ РІС‹РІРµСЃС‚Рё СЃРїСЂР°РІРєСѓ РїРѕ РєР°Р¶РґРѕР№ РєРѕРјР°РЅРґРµ (РєРѕСЃС‚С‹Р»СЊ)
 	HelpCommand* help = dynamic_cast<HelpCommand*>(all_commands[0]);
 	if (help != nullptr) {
 		help->set_available_commands(this->all_commands);
 	}
 	else {
-		throw(std::exception("Не удалось получить доступ к команде справки"));
+		throw(std::exception("РќРµ СѓРґР°Р»РѕСЃСЊ РїРѕР»СѓС‡РёС‚СЊ РґРѕСЃС‚СѓРї Рє РєРѕРјР°РЅРґРµ СЃРїСЂР°РІРєРё"));
 	}
 }
 
@@ -29,7 +29,7 @@ Application::~Application() {
 std::vector<Command*> Application::generate_available_commands_list() {
 	std::vector<Command*> ans;
 
-	// Первой обязательно должна быть команда Help (костыль)
+	// РџРµСЂРІРѕР№ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РєРѕРјР°РЅРґР° Help (РєРѕСЃС‚С‹Р»СЊ)
 	ans.push_back(new HelpCommand());
 
 	ans.push_back(new AddDepartmentCommand(&data));
@@ -68,7 +68,7 @@ void Application::executeCommand(Command* command) {
 
 bool Application::initialise(std::string file_name) {
 	if (this->data.load_data(file_name) != Error_type::success) {
-		Input_output::print(u8"Невозможно считать файл\n");
+		Input_output::print(u8"РќРµРІРѕР·РјРѕР¶РЅРѕ СЃС‡РёС‚Р°С‚СЊ С„Р°Р№Р»\n");
 		return false;
 	}
 
@@ -90,7 +90,7 @@ void Application::work_with_user() {
 	while (dynamic_cast<ExitCommand*>(command) == nullptr) {
 		this->executeCommand(command);
 
-		Input_output::print(u8"Введите команду: ");
+		Input_output::print(u8"Р’РІРµРґРёС‚Рµ РєРѕРјР°РЅРґСѓ: ");
 		std::string input = Input_output::read();
 		command = this->parse_user_input(input);
 	}

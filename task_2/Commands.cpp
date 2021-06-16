@@ -36,7 +36,7 @@ AddDepartmentCommand::AddDepartmentCommand(Database* database, std::string input
 
 bool AddDepartmentCommand::execute() {
 	this->make_backup();
-	Input_output::print(u8"Введите название нового подразделения: ");
+	Input_output::print(u8"Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РЅРѕРІРѕРіРѕ РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏ: ");
 	std::string dep_name = Input_output::read();
 	Department dep(dep_name);
 	this->db->add_dep(dep);
@@ -46,7 +46,7 @@ bool AddDepartmentCommand::execute() {
 }
 
 std::string AddDepartmentCommand::get_info() const {
-	std::string ans = u8"AddDepartmentCommand. Для вызова введите: " + this->shortcut + u8"\nДобавляет подразделение\n";
+	std::string ans = u8"AddDepartmentCommand. Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚Рµ: " + this->shortcut + u8"\nР”РѕР±Р°РІР»СЏРµС‚ РїРѕРґСЂР°Р·РґРµР»РµРЅРёРµ\n";
 	return ans;
 }
 
@@ -60,11 +60,11 @@ AddEmploymentCommand::AddEmploymentCommand(Database* database, std::string input
 
 bool AddEmploymentCommand::execute() {
 	this->make_backup();
-	Input_output::print(u8"Введите через пробел ФИО сотрудника: ");
+	Input_output::print(u8"Р’РІРµРґРёС‚Рµ С‡РµСЂРµР· РїСЂРѕР±РµР» Р¤РРћ СЃРѕС‚СЂСѓРґРЅРёРєР°: ");
 	std::string surname, name, middleName; std::istringstream(Input_output::read()) >> surname >> name >> middleName;
-	Input_output::print(u8"Введите должность сотрудника: ");
+	Input_output::print(u8"Р’РІРµРґРёС‚Рµ РґРѕР»Р¶РЅРѕСЃС‚СЊ СЃРѕС‚СЂСѓРґРЅРёРєР°: ");
 	std::string function = Input_output::read();
-	Input_output::print(u8"Введите зароботную плату сотрудника: ");
+	Input_output::print(u8"Р’РІРµРґРёС‚Рµ Р·Р°СЂРѕР±РѕС‚РЅСѓСЋ РїР»Р°С‚Сѓ СЃРѕС‚СЂСѓРґРЅРёРєР°: ");
 	long double salary; std::istringstream (Input_output::read()) >> salary;
 	
 	Employment emp(surname, name, middleName, function, salary);
@@ -75,7 +75,7 @@ bool AddEmploymentCommand::execute() {
 }
 
 std::string AddEmploymentCommand::get_info() const {
-	std::string ans = u8"AddEmploymentCommand. Для вызова введите: " + this->shortcut + u8"\nДобавляет сотрудника в текущее подразделение\n";
+	std::string ans = u8"AddEmploymentCommand. Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚Рµ: " + this->shortcut + u8"\nР”РѕР±Р°РІР»СЏРµС‚ СЃРѕС‚СЂСѓРґРЅРёРєР° РІ С‚РµРєСѓС‰РµРµ РїРѕРґСЂР°Р·РґРµР»РµРЅРёРµ\n";
 	return ans;
 }
 
@@ -89,7 +89,7 @@ SelectOtherDepartmentCommand::SelectOtherDepartmentCommand(Database* database, s
 
 bool SelectOtherDepartmentCommand::execute() {
 	this->make_backup();
-	Input_output::print(u8"Введите id подразделения: ");
+	Input_output::print(u8"Р’РІРµРґРёС‚Рµ id РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏ: ");
 	int id; std::istringstream(Input_output::read()) >>id;
 	try	{
 		this->db->select_dep(id);
@@ -104,7 +104,7 @@ bool SelectOtherDepartmentCommand::execute() {
 }
 
 std::string SelectOtherDepartmentCommand::get_info() const {
-	std::string ans = u8"SelectOtherDepartmentCommand. Для вызова введите: " + this->shortcut + u8"\nПозволяет выбрать подразделение в качестве текущего\n";
+	std::string ans = u8"SelectOtherDepartmentCommand. Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚Рµ: " + this->shortcut + u8"\nРџРѕР·РІРѕР»СЏРµС‚ РІС‹Р±СЂР°С‚СЊ РїРѕРґСЂР°Р·РґРµР»РµРЅРёРµ РІ РєР°С‡РµСЃС‚РІРµ С‚РµРєСѓС‰РµРіРѕ\n";
 	return ans;
 }
 
@@ -118,7 +118,7 @@ SelectOtherEmploymentCommand::SelectOtherEmploymentCommand(Database* database, s
 
 bool SelectOtherEmploymentCommand::execute() {
 	this->make_backup();
-	Input_output::print(u8"Введите id сотрудника: ");
+	Input_output::print(u8"Р’РІРµРґРёС‚Рµ id СЃРѕС‚СЂСѓРґРЅРёРєР°: ");
 	int id; std::istringstream(Input_output::read()) >> id;
 
 	try {
@@ -133,7 +133,7 @@ bool SelectOtherEmploymentCommand::execute() {
 }
 
 std::string SelectOtherEmploymentCommand::get_info() const {
-	std::string ans = u8"SelectOtherEmploymentCommand. Для вызова введите: " + this->shortcut + u8"\nПозволяет выбрать текущего сотрудника текущего подразделения\n";
+	std::string ans = u8"SelectOtherEmploymentCommand. Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚Рµ: " + this->shortcut + u8"\nРџРѕР·РІРѕР»СЏРµС‚ РІС‹Р±СЂР°С‚СЊ С‚РµРєСѓС‰РµРіРѕ СЃРѕС‚СЂСѓРґРЅРёРєР° С‚РµРєСѓС‰РµРіРѕ РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏ\n";
 	return ans;
 }
 
@@ -154,7 +154,7 @@ bool RemoveDepartmentCommand::execute() {
 }
 
 std::string RemoveDepartmentCommand::get_info() const {
-	std::string ans = u8"RemoveDepartmentCommand. Для вызова введите: " + this->shortcut + u8"\nУдаляет текущее подразделение вместе и его сотрудников\n";
+	std::string ans = u8"RemoveDepartmentCommand. Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚Рµ: " + this->shortcut + u8"\nРЈРґР°Р»СЏРµС‚ С‚РµРєСѓС‰РµРµ РїРѕРґСЂР°Р·РґРµР»РµРЅРёРµ РІРјРµСЃС‚Рµ Рё РµРіРѕ СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ\n";
 	return ans;
 }
 
@@ -175,7 +175,7 @@ bool RemoveEmploymentCommand::execute() {
 }
 
 std::string RemoveEmploymentCommand::get_info() const {
-	std::string ans = u8"RemoveEmploymentCommand. Для вызова введите: " + this->shortcut + u8"\nУдаляет текущего сотрудника текущего подразделения\n";
+	std::string ans = u8"RemoveEmploymentCommand. Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚Рµ: " + this->shortcut + u8"\nРЈРґР°Р»СЏРµС‚ С‚РµРєСѓС‰РµРіРѕ СЃРѕС‚СЂСѓРґРЅРёРєР° С‚РµРєСѓС‰РµРіРѕ РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏ\n";
 	return ans;
 }
 
@@ -189,7 +189,7 @@ EditDepartmentCommand::EditDepartmentCommand(Database* database, std::string inp
 
 bool EditDepartmentCommand::execute() {
 	this->make_backup();
-	Input_output::print(u8"Введите новое название подразделения: ");
+	Input_output::print(u8"Р’РІРµРґРёС‚Рµ РЅРѕРІРѕРµ РЅР°Р·РІР°РЅРёРµ РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏ: ");
 	std::string dep_name = Input_output::read();
 	Department dep(dep_name);
 	this->db->edit_cur_dep(dep);
@@ -199,7 +199,7 @@ bool EditDepartmentCommand::execute() {
 }
 
 std::string EditDepartmentCommand::get_info() const {
-	std::string ans = u8"EditDepartmentCommand. Для вызова введите: " + this->shortcut + u8"\nПозволяет редактировать текущее подразделение\n";
+	std::string ans = u8"EditDepartmentCommand. Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚Рµ: " + this->shortcut + u8"\nРџРѕР·РІРѕР»СЏРµС‚ СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ С‚РµРєСѓС‰РµРµ РїРѕРґСЂР°Р·РґРµР»РµРЅРёРµ\n";
 	return ans;
 }
 
@@ -213,11 +213,11 @@ EditEmploymentCommand::EditEmploymentCommand(Database* database, std::string inp
 
 bool EditEmploymentCommand::execute() {
 	this->make_backup();
-	Input_output::print(u8"Введите новое ФИО сотрудника (через пробел): ");
+	Input_output::print(u8"Р’РІРµРґРёС‚Рµ РЅРѕРІРѕРµ Р¤РРћ СЃРѕС‚СЂСѓРґРЅРёРєР° (С‡РµСЂРµР· РїСЂРѕР±РµР»): ");
 	std::string surname, name, middleName; std::istringstream(Input_output::read()) >> surname >> name >> middleName;
-	Input_output::print(u8"Введите новую должность сотрудника: ");
+	Input_output::print(u8"Р’РІРµРґРёС‚Рµ РЅРѕРІСѓСЋ РґРѕР»Р¶РЅРѕСЃС‚СЊ СЃРѕС‚СЂСѓРґРЅРёРєР°: ");
 	std::string function; std::istringstream(Input_output::read()) >> function;
-	Input_output::print(u8"Введите зароботную плату сотрудника: ");
+	Input_output::print(u8"Р’РІРµРґРёС‚Рµ Р·Р°СЂРѕР±РѕС‚РЅСѓСЋ РїР»Р°С‚Сѓ СЃРѕС‚СЂСѓРґРЅРёРєР°: ");
 	long double salary; std::istringstream(Input_output::read()) >> salary;
 
 	Employment emp(surname, name, middleName, function, salary);
@@ -228,7 +228,7 @@ bool EditEmploymentCommand::execute() {
 }
 
 std::string EditEmploymentCommand::get_info() const {
-	std::string ans = u8"EditEmploymentCommand. Для вызова введите: " + this->shortcut + u8"\nПозволяет редактировать текущего работника текущего подразделения\n";
+	std::string ans = u8"EditEmploymentCommand. Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚Рµ: " + this->shortcut + u8"\nРџРѕР·РІРѕР»СЏРµС‚ СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ С‚РµРєСѓС‰РµРіРѕ СЂР°Р±РѕС‚РЅРёРєР° С‚РµРєСѓС‰РµРіРѕ РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏ\n";
 	return ans;
 }
 
@@ -246,7 +246,7 @@ bool UndoCommand::execute() {
 }
 
 std::string UndoCommand::get_info() const {
-	std::string ans = u8"UndoCommand. Для вызова введите: " + this->shortcut + u8"\nОтменяет последнее действие\n";
+	std::string ans = u8"UndoCommand. Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚Рµ: " + this->shortcut + u8"\nРћС‚РјРµРЅСЏРµС‚ РїРѕСЃР»РµРґРЅРµРµ РґРµР№СЃС‚РІРёРµ\n";
 	return ans;
 }
 
@@ -264,7 +264,7 @@ bool RedoCommand::execute() {
 }
 
 std::string RedoCommand::get_info() const {
-	std::string ans = u8"RedoCommand. Для вызова введите: " + this->shortcut + u8"\nВозвращает отменённое действие\n";
+	std::string ans = u8"RedoCommand. Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚Рµ: " + this->shortcut + u8"\nР’РѕР·РІСЂР°С‰Р°РµС‚ РѕС‚РјРµРЅС‘РЅРЅРѕРµ РґРµР№СЃС‚РІРёРµ\n";
 	return ans;
 }
 
@@ -277,12 +277,12 @@ ErrorCommand::ErrorCommand() : Command("") {
 }
 
 bool ErrorCommand::execute() {
-	Input_output::print(u8"Ошибка, введена неверная команда. Введите help для просмотра доступных команд.\n");
+	Input_output::print(u8"РћС€РёР±РєР°, РІРІРµРґРµРЅР° РЅРµРІРµСЂРЅР°СЏ РєРѕРјР°РЅРґР°. Р’РІРµРґРёС‚Рµ help РґР»СЏ РїСЂРѕСЃРјРѕС‚СЂР° РґРѕСЃС‚СѓРїРЅС‹С… РєРѕРјР°РЅРґ.\n");
 	return false;
 }
 
 std::string ErrorCommand::get_info() const {
-	std::string ans = u8"ErrorCommand. Служебная функция. Сообщает пользователю о неверном вводе команды\n";
+	std::string ans = u8"ErrorCommand. РЎР»СѓР¶РµР±РЅР°СЏ С„СѓРЅРєС†РёСЏ. РЎРѕРѕР±С‰Р°РµС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЋ Рѕ РЅРµРІРµСЂРЅРѕРј РІРІРѕРґРµ РєРѕРјР°РЅРґС‹\n";
 	return ans;
 }
 
@@ -296,7 +296,7 @@ HelpCommand::HelpCommand(std::string input_shortcut) : Command(input_shortcut) {
 }
 
 bool HelpCommand::execute() {
-	Input_output::print(u8"Доступные команды:\n");
+	Input_output::print(u8"Р”РѕСЃС‚СѓРїРЅС‹Рµ РєРѕРјР°РЅРґС‹:\n");
 	std::string ans = u8"";
 	for (auto i : this->all_commands) {
 		ans += i->get_info() + u8"\n";
@@ -306,7 +306,7 @@ bool HelpCommand::execute() {
 }
 
 std::string HelpCommand::get_info() const {
-	std::string ans = u8"HelpCommand. Для вызова введите: " + this->shortcut + u8"\nВыводит доступные команды с их Для вызова введитеами и описаниями\n";
+	std::string ans = u8"HelpCommand. Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚Рµ: " + this->shortcut + u8"\nР’С‹РІРѕРґРёС‚ РґРѕСЃС‚СѓРїРЅС‹Рµ РєРѕРјР°РЅРґС‹ СЃ РёС… Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚РµР°РјРё Рё РѕРїРёСЃР°РЅРёСЏРјРё\n";
 	return ans;
 }
 
@@ -326,7 +326,7 @@ bool PrintCommand::execute() {
 }
 
 std::string PrintCommand::get_info() const {
-	std::string ans = u8"PrintCommand. Для вызова введите: " + this->shortcut + u8"\nВыводит информацию обо всез сотрудниках и подразделениях\n";
+	std::string ans = u8"PrintCommand. Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚Рµ: " + this->shortcut + u8"\nР’С‹РІРѕРґРёС‚ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР±Рѕ РІСЃРµР· СЃРѕС‚СЂСѓРґРЅРёРєР°С… Рё РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏС…\n";
 	return ans;
 }
 
@@ -337,14 +337,14 @@ PrintCommand* PrintCommand::get_instance() {
 SaveCommand::SaveCommand(Database* database, std::string input_shortcut) : Command(database, input_shortcut) {}
 
 bool SaveCommand::execute() {
-	Input_output::print(u8"Данная команда не была реализована\n");
-	//Input_output::print(u8"Введите название файла для сохранения, или просто нажмите enter для записи в исходный файл: ");
+	Input_output::print(u8"Р”Р°РЅРЅР°СЏ РєРѕРјР°РЅРґР° РЅРµ Р±С‹Р»Р° СЂРµР°Р»РёР·РѕРІР°РЅР°\n");
+	//Input_output::print(u8"Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ С„Р°Р№Р»Р° РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ, РёР»Рё РїСЂРѕСЃС‚Рѕ РЅР°Р¶РјРёС‚Рµ enter РґР»СЏ Р·Р°РїРёСЃРё РІ РёСЃС…РѕРґРЅС‹Р№ С„Р°Р№Р»: ");
 	//this->db->save_data(Input_output::read());
 	return false;
 }
 
 std::string SaveCommand::get_info() const {
-	std::string ans = u8"SaveCommand. Для вызова введите: " + this->shortcut + u8"\nСохраняет изменения\n";
+	std::string ans = u8"SaveCommand. Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚Рµ: " + this->shortcut + u8"\nРЎРѕС…СЂР°РЅСЏРµС‚ РёР·РјРµРЅРµРЅРёСЏ\n";
 	return ans;
 }
 
@@ -364,7 +364,7 @@ bool ExitCommand::execute() {
 }
 
 std::string ExitCommand::get_info() const {
-	std::string ans = u8"ExitCommand. Для вызова введите: " + this->shortcut + u8"\nВыход без сохранения изменений\n";
+	std::string ans = u8"ExitCommand. Р”Р»СЏ РІС‹Р·РѕРІР° РІРІРµРґРёС‚Рµ: " + this->shortcut + u8"\nР’С‹С…РѕРґ Р±РµР· СЃРѕС…СЂР°РЅРµРЅРёСЏ РёР·РјРµРЅРµРЅРёР№\n";
 	return ans;
 }
 

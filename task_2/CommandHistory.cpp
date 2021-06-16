@@ -45,7 +45,7 @@ void CommandHistory::undo() {
 		this->cur_id -= 1;
 	}
 	else {
-		Input_output::print(u8"Нет команд для отмены\n");
+		Input_output::print(u8"РќРµС‚ РєРѕРјР°РЅРґ РґР»СЏ РѕС‚РјРµРЅС‹\n");
 	}
 }
 
@@ -55,6 +55,6 @@ void CommandHistory::redo() {
 		this->commands[cur_id]->redo();
 	}
 	else {
-		Input_output::print(u8"Нет команд для повтора\n");
+		Input_output::print(u8"РќРµС‚ РєРѕРјР°РЅРґ РґР»СЏ РїРѕРІС‚РѕСЂР°\n");
 	}
 }

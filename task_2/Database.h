@@ -48,7 +48,7 @@ public:
 
 	void edit_cur_emp(Employment& emp);
 
-	// Возвращает строку с информацией о сотрудниках и подразделениях
+	// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃС‚СЂРѕРєСѓ СЃ РёРЅС„РѕСЂРјР°С†РёРµР№ Рѕ СЃРѕС‚СЂСѓРґРЅРёРєР°С… Рё РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏС…
 	std::string get_formated_data();
 
 	Error_type load_data(std::string input_file_name);
