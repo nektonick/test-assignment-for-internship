@@ -6,6 +6,8 @@
 
 #include "Department.h"
 
+#include <iostream>
+
 
 enum class Error_type {
 	success = 1,
@@ -16,10 +18,10 @@ enum class Error_type {
 class Database {
 protected:
 	std::string file_name;
-	tinyxml2::XMLDocument* doc = nullptr;;
+	tinyxml2::XMLDocument* doc = nullptr;
 public:
-	Department* cur_dep;
-	Employment* cur_emp;
+	int cur_dep_index = 0;
+	int cur_emp_index = 0;
 	std::vector<Department> departments;
 
 	Database();
@@ -30,37 +32,21 @@ public:
 
 	~Database();
 
-	void add_dep(Department& dep) {
+	void add_dep(Department& dep);
 
-	}
+	void add_emp(Employment& emp);
 
-	void add_emp(Employment& emp) {
+	void select_dep(int id);
 
-	}
+	void select_emp(int id);
 
-	void select_dep(size_t id) {
+	void remove_cur_dep();
 
-	}
+	void remove_cur_emp();
 
-	void select_emp(size_t id) {
+	void edit_cur_dep(Department& dep);
 
-	}
-
-	void remove_cur_dep() {
-
-	}
-
-	void remove_cur_emp() {
-
-	}
-
-	void edit_cur_dep(Department& dep) {
-
-	}
-
-	void edit_cur_emp(Employment& emp) {
-
-	}
+	void edit_cur_emp(Employment& emp);
 
 	// Возвращает строку с информацией о сотрудниках и подразделениях
 	std::string get_formated_data();

@@ -12,8 +12,10 @@ class CommandHistory;
 class Command {
 protected:
 	Database* db;
-	std::vector<Department> backup;
-	std::vector<Department> backup_after_exec;
+	//std::vector<Department> backup;
+	//std::vector<Department> backup_after_exec;
+	Database backup;
+	Database backup_after_exec;
 	std::string shortcut = "";
 public:
 	Command(std::string input_shortcut);

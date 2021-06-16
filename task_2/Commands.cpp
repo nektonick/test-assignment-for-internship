@@ -11,19 +11,19 @@ Command::Command(Database* database, std::string input_shortcut) {
 }
 
 void Command::make_backup() {
-	this->backup = this->db->departments;
+	this->backup = *this->db;
 }
 
 void Command::make_backup_after_exec() {
-	this->backup_after_exec = this->db->departments;
+	this->backup_after_exec = *this->db;
 }
 
 void Command::undo() {
-	this->db->departments = this->backup;
+	*this->db = this->backup;
 }
 
 void Command::redo() {
-	this->db->departments = this->backup_after_exec;
+	*this->db = this->backup_after_exec;
 }
 
 std::string Command::get_shortcut() const {
@@ -63,7 +63,7 @@ bool AddEmploymentCommand::execute() {
 	Input_output::print(u8"Введите через пробел ФИО сотрудника: ");
 	std::string surname, name, middleName; std::istringstream(Input_output::read()) >> surname >> name >> middleName;
 	Input_output::print(u8"Введите должность сотрудника: ");
-	std::string function; std::istringstream(Input_output::read()) >> function;
+	std::string function = Input_output::read();
 	Input_output::print(u8"Введите зароботную плату сотрудника: ");
 	long double salary; std::istringstream (Input_output::read()) >> salary;
 	
@@ -90,8 +90,14 @@ SelectOtherDepartmentCommand::SelectOtherDepartmentCommand(Database* database, s
 bool SelectOtherDepartmentCommand::execute() {
 	this->make_backup();
 	Input_output::print(u8"Введите id подразделения: ");
-	size_t id; std::istringstream(Input_output::read()) >>id;
-	this->db->select_dep(id);
+	int id; std::istringstream(Input_output::read()) >>id;
+	try	{
+		this->db->select_dep(id);
+	}
+	catch (const std::exception& e) {
+		Input_output::print(e.what());
+	}
+	
 
 	this->make_backup_after_exec();
 	return true;
@@ -113,8 +119,14 @@ SelectOtherEmploymentCommand::SelectOtherEmploymentCommand(Database* database, s
 bool SelectOtherEmploymentCommand::execute() {
 	this->make_backup();
 	Input_output::print(u8"Введите id сотрудника: ");
-	size_t id; std::istringstream(Input_output::read()) >> id;
-	this->db->select_emp(id);
+	int id; std::istringstream(Input_output::read()) >> id;
+
+	try {
+		this->db->select_emp(id);
+	}
+	catch (const std::exception& e) {
+		Input_output::print(e.what());
+	}
 
 	this->make_backup_after_exec();
 	return true;
@@ -325,8 +337,9 @@ PrintCommand* PrintCommand::get_instance() {
 SaveCommand::SaveCommand(Database* database, std::string input_shortcut) : Command(database, input_shortcut) {}
 
 bool SaveCommand::execute() {
-	Input_output::print(u8"Введите название файла для сохранения, или просто нажмите enter для записи в исходный файл: ");
-	this->db->save_data(Input_output::read());
+	Input_output::print(u8"Данная команда не была реализована\n");
+	//Input_output::print(u8"Введите название файла для сохранения, или просто нажмите enter для записи в исходный файл: ");
+	//this->db->save_data(Input_output::read());
 	return false;
 }
 
